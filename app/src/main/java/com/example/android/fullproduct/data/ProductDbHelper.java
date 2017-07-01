@@ -30,6 +30,7 @@ public class ProductDbHelper extends SQLiteOpenHelper {
         // the products table.
         // TODO create here string with campos de la tabla
 
+
         // Execute the SQL statement
         // TODO quitar esta línea y habilitar la siguiente
         // db.execSQL(SQL_CREATE_PRODUCTS_TABLE);
