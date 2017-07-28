@@ -94,20 +94,4 @@ public class ProductContract {
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
