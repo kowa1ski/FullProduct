@@ -120,12 +120,59 @@ public class Editor extends AppCompatActivity implements LoaderManager.LoaderCal
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+
+        // Bail early if the cursor is null or there is less than 1 row in the cursor.
+        if (cursor == null || cursor.getCount() < 1) {
+            return;
+        }
+
+        // Proceed with moving to the first row of the cursor and reading data from it
+        // (This should be the only row in the cursor)
+        if (cursor.moveToFirst()) {
+            // Find the columns of product attributes that we are interested in.
+            int nameColumIndex = cursor.getColumnIndex(ProductContract.ProductEntry.COLUMN_PRODUCT_NAME);
+            int quantityColumIndex = cursor.getColumnIndex(ProductContract.ProductEntry.COLUMN_QUANTITY);
+            int priceColumIndex = cursor.getColumnIndex(ProductContract.ProductEntry.COLUMN_PRICE);
+            int imageColumnIndex = cursor.getColumnIndex(ProductContract.ProductEntry.COLUMN_IMAGE);
+
+            // Extract the value from the Cursor for the given column index
+            String name = cursor.getString(nameColumIndex);
+            int quantity = cursor.getInt(quantityColumIndex);
+            int price = cursor.getInt(priceColumIndex);
+            int image = cursor.getInt(imageColumnIndex);
+
+            // Update the views on the screen with the values from the database.
+            mNameProduct.setText(name);
+            mQuantityProduct.setText(Integer.toString(quantity));
+
+
+
+
+
+
+        }
+
 
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
+        // If the loader is invalidated, clear out all the data from the input fields.
+        mNameProduct.setText("");
+        mQuantityProduct.setText("");
+
+
+
     }
+
+
+
+
+
+
+
+
+
 }
