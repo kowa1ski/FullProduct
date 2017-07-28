@@ -1,9 +1,11 @@
 package com.example.android.fullproduct.data;
 
 import android.content.ContentProvider;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 
@@ -46,10 +48,46 @@ public class ProductProvider extends ContentProvider {
         return true;
     }
 
-    @Nullable
+    /**
+     * Perform the query for the given Uri. Use the given projection, selection,
+     * selection arguments, and sort order.
+     * @param uri
+     * @param projection
+     * @param selection
+     * @param selectionArgs
+     * @param sortOrder
+     * @return
+     */
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        return null;
+
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+        Cursor cursor;
+
+        int match = sUrimatcher.match(uri);
+        switch (match){
+            case PRODUCTS:
+                cursor = db.query(ProductContract.ProductEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                break;
+            case PRODUCTS_ID:
+                selection = ProductContract.ProductEntry._ID + "=?";
+                selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
+
+                cursor = db.query(ProductContract.ProductEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                break;
+            default:
+                throw new IllegalArgumentException("Cannot query unknown URI " + uri);
+
+        }
+
+        // Set notification URI on the Cursor.
+        // So we kow what content URI the Cursor was created for.
+        // If the data at this URI changes, then we know we need to update the Cursor
+        cursor.setNotificationUri(getContext().getContentResolver(), uri);
+
+
+        return cursor;
     }
 
     @Nullable
