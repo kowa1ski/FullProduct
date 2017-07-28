@@ -90,10 +90,26 @@ public class ProductProvider extends ContentProvider {
         return cursor;
     }
 
-    @Nullable
+    /**
+     * Returns the MIME type of data for the content URI.
+     * @param uri
+     * @return
+     */
     @Override
     public String getType(Uri uri) {
-        return null;
+
+        final int match = sUrimatcher.match(uri);
+        switch (match){
+            case PRODUCTS:
+                return ProductContract.ProductEntry.CONTENT_LIST_TYPE;
+            case PRODUCTS_ID:
+                return ProductContract.ProductEntry.CONTENT_ITEM_TYPE;
+            default:
+                throw new IllegalArgumentException("Unknown URI " + uri + " with match" + match);
+
+        }
+
+
     }
 
     @Nullable
