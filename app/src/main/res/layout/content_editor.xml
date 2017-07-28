@@ -17,22 +17,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="NameProduct"
         android:ems="10"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/editText" />
+        android:id="@+id/productName"
+        android:hint="Product NAME" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:layout_below="@+id/editText"
+        android:id="@+id/numberOfProducts"
+        android:contentDescription="numero1"
+        android:hint="number of products"
+        android:layout_below="@+id/productName"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="21dp"
-        android:id="@+id/editText2"
-        android:text="Numbers" />
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
