@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.android.fullproduct.data.ProductContract;
+import com.example.android.fullproduct.data.ProductProvider;
 
 public class Editor extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -72,6 +73,13 @@ public class Editor extends AppCompatActivity implements LoaderManager.LoaderCal
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // save pet to database
+                //TODO hacer el método e indicarlo justo aquí debajo
+                insertarmetodoaqui();
+                // Exit activity
+                // Return from this Activity to CatalogActivity
+                finish();
+                return true;
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
