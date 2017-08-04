@@ -1,5 +1,6 @@
 package com.example.android.fullproduct;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.android.fullproduct.data.ProductContract;
 import com.example.android.fullproduct.data.ProductProvider;
@@ -66,6 +68,7 @@ public class Editor extends AppCompatActivity implements LoaderManager.LoaderCal
 
 
 
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -74,12 +77,12 @@ public class Editor extends AppCompatActivity implements LoaderManager.LoaderCal
             @Override
             public void onClick(View view) {
                 // save pet to database
-                //TODO hacer el método e indicarlo justo aquí debajo
-                insertarmetodoaqui();
+                //TODO (hacer el método e indicarlo justo aquí debajo) Ya está. Voy a probarlo.
+                saveProduct();
                 // Exit activity
                 // Return from this Activity to CatalogActivity
                 finish();
-                return true;
+
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
@@ -88,9 +91,21 @@ public class Editor extends AppCompatActivity implements LoaderManager.LoaderCal
 
     }
 
+    private void saveProduct() {
+        String nameProductString = mNameProduct.getText().toString().trim();
+        String quantityProductString = mQuantityProduct.getText().toString().trim();
+
+        // Create a ContentValues objetc where column names are the keys,
+        //and product attributes from the editor are the values.
+        ContentValues values = new ContentValues();
+        values.put(ProductContract.ProductEntry.COLUMN_PRODUCT_NAME, nameProductString);
+        values.put(ProductContract.ProductEntry.COLUMN_QUANTITY, quantityProductString);
+
+        // The insertion was sucessful and we can display a toast
+        Toast.makeText(this, "product saved", Toast.LENGTH_SHORT).show();
 
 
-
+    }
 
 
     /**
