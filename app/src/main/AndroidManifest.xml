@@ -22,6 +22,10 @@
             android:name=".Editor"
             android:label="@string/title_activity_editor"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
+
+
+
     </application>
 
 </manifest>

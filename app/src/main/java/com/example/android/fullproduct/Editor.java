@@ -101,8 +101,20 @@ public class Editor extends AppCompatActivity implements LoaderManager.LoaderCal
         values.put(ProductContract.ProductEntry.COLUMN_PRODUCT_NAME, nameProductString);
         values.put(ProductContract.ProductEntry.COLUMN_QUANTITY, quantityProductString);
 
-        // The insertion was sucessful and we can display a toast
-        Toast.makeText(this, "product saved", Toast.LENGTH_SHORT).show();
+        // Insert a new product into the provider, returning the content URI for the new product.
+        Uri newUri = getContentResolver().insert(ProductContract.ProductEntry.CONTENT_URI, values);
+
+        // Show a toast message depending on whether or not the insertion
+        // was successful.
+        if (newUri == null){
+            // If the new content is null, then there was an error with insetion.
+            Toast.makeText(this, "Error with saving product", Toast.LENGTH_SHORT).show();
+        }else {
+            // Otherwise, the insertion was sucessful and we can display a toast
+            Toast.makeText(this, "product saved", Toast.LENGTH_SHORT).show();
+        }
+
+
 
 
     }
