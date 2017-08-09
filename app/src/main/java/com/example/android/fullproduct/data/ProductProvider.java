@@ -32,7 +32,7 @@ public class ProductProvider extends ContentProvider {
     // Static initializer. This is run the first time anything is called from this class.
     static {
         sUrimatcher.addURI(ProductContract.CONTENT_AUTHORITY, ProductContract.PATH_PRODUCT, PRODUCTS);
-        sUrimatcher.addURI(ProductContract.CONTENT_AUTHORITY, ProductContract.PATH_PRODUCT, PRODUCTS_ID);
+        sUrimatcher.addURI(ProductContract.CONTENT_AUTHORITY, ProductContract.PATH_PRODUCT + "/#", PRODUCTS_ID);
     }
 
     /* Database helper object */
